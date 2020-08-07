@@ -1,0 +1,26 @@
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="email">
+        </mat-form-field><br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Mot de passe</mat-label>
+            <input type="password" matInput formControlName="password" placeholder="mot de passe">
+        </mat-form-field><br>
+        <button mat-button color="primary" type="submit">créer un compte</button>
+</form>
+{{message}}
+{{result | json}}
+
+<hr>
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+    <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="email">
+    </mat-form-field><br>
+    <mat-form-field class="example-full-width">
+        <mat-label>Mot de passe</mat-label>
+        <input type="password" matInput formControlName="password" placeholder="mot de passe">
+    </mat-form-field><br>
+    <button mat-button color="primary" type="submit">se connecter</button>
+</form>

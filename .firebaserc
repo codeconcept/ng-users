@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ng-users-b8de1": {
+      "hosting": {
+        "ng-users": [
+          "ng-users-b8de1"
+        ]
+      }
+    }
+  }
+}

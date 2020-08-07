@@ -1,0 +1,8 @@
+<div *ngIf="!user">
+    loading...
+</div>
+
+<div *ngIf="user">
+    {{ user | json }}
+    {{ user.createdAt | date:'dd/MM/yyyy à HH:mm' }}
+</div>
