@@ -2,8 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Observable, Subscription } from 'rxjs';
+import {switchMap} from 'rxjs/operators';
+
 import { User } from 'firebase';
 import { UserCustom } from '../models/user';
+
 
 @Component({
   selector: 'app-user-details',
@@ -16,18 +19,20 @@ export class UserDetailsComponent implements OnDestroy {
   sub: Subscription;
 
   constructor(private activatedRoute: ActivatedRoute, private userService: UserService) {
-    this.sub = this.activatedRoute.paramMap
-    .subscribe(params => {
-      this.uid = params.get('id') || '';
-      console.log('uid', this.uid);   
-      this.userService
-        .getUser(this.uid)
-        .subscribe((data: UserCustom) => {
-          this.user = data;
-          this.user.createdAt = (data.createdAt as any).toDate();
-      }, err => {
-        console.error(err);
-      });
+    this.sub = this.activatedRoute
+    .params
+    .pipe(
+      switchMap(params => {
+        console.log('params', params);
+        this.uid =params.id;
+        return this.userService.getUser(this.uid)
+      })
+    )
+    .subscribe(user => {
+      this.user = user;
+      this.user.createdAt = (this.user?.createdAt as any).toDate();
+    }, err => {
+      console.error(err);
     });
   }
 
